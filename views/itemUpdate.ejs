@@ -1,0 +1,44 @@
+<%- include('header'); -%>
+    
+    
+
+<div class="box" id="heading" >
+    <h1> Updating this item :  <%= itemName %></h1>
+    
+</div>
+<div class="box"  >
+    <form action="/home" method="get">
+         <button onclick="history.back()">  Go back home  </button>
+    </form>
+   
+    
+</div>
+<div class="box">
+    
+        <div class="item">   
+            <p> Current information </p> 
+            <ul>
+                <li> <%= item.name %> </li>
+                <li> <%= item.weight %> g </li>
+            </ul> 
+        </div>
+        <div class="item">   
+            <p> New information </p>
+            <form action="/updateItem" method="post">
+                <div>
+                    <input type="text" name="newItemName" placeholder="New name (can be empty)" autocomplete="off">
+                    <input type="text" name="newItemWeight" placeholder="New weight (can be empty)" autocomplete="off">
+                </div>
+                <!-- <div>
+                    <input type="text" name="newItemField" placeholder="New field name " autocomplete="off">
+                    <input type="text" name="newFieldValue" placeholder="value of the new field" autocomplete="off">
+                </div> -->
+                <input type="hidden" name="elementName" value="<%= item.name %>">
+                    <button type="submit"  name="storage" value="<%= StorageName %>"  > Update </button>
+            </form> 
+            
+        </div>
+        
+</div>
+
+<%- include('footer'); -%>

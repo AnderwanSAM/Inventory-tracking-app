@@ -1,0 +1,71 @@
+
+    <%- include('header'); -%>
+   
+    <div >
+    <div id="allWarehouses"> 
+
+    
+        <div class="box" id="heading" >
+            <h1> All Warehouses </h1>
+            
+        </div>
+        <div class="box">
+            
+               <% newWarehouses.forEach(element=> { %>
+                <!-- <form  action="/warehouses" method="post">  -->
+                <div>   
+                     <p> <%= element.name %> </p>
+                     <form target="_blank" action="/warehouses" method="post">
+                        <input type="hidden" name="warehouseId" value="<%=element._id %>">
+                     <button> Manage warehouse inventory </button>
+                     </form>
+                     <form action="/deleteWarehouse" method="post">
+                        <input type="hidden" name="warehouseId" value="<%=element._id %>">
+                          <button> Delete warehouse</button> 
+                     </form>
+                
+                   
+
+                </div>
+                <!-- </form> -->
+               <% }); %>
+    
+               <form class="item" action="/addWarehouse" method="post">
+                <div  >
+                 <input type="text" name="newWarehouseName" placeholder="New warehouse name " autocomplete="off">
+                </div>
+                 <button type="submit" class="submission"> +  </button>
+           </form>
+        </div>
+       
+        </div>
+
+
+    <div id="allInventoryItems" > 
+
+    
+    <div class="box" id="heading" >
+        <h1> All inventory items (in all locations )</h1>
+        
+    </div>
+    <div class="box">
+        
+           <% newInventoryItems.forEach(element=> { %>
+            <!-- <form  action="/delete" method="post">  -->
+            <div class="item">   
+                <!-- <input type="checkbox"    name="checkbox" value="<%=element._id %>"  onChange="this.form.submit()"> -->
+                <ul>
+                    <li> <%= element.name %> </li>
+                    <li> <%= element.weight %> g </li>
+                </ul> 
+            </div>
+            <!-- </form> -->
+           <% }); %>
+
+    </div>
+
+    </div>
+
+</div>
+
+<%- include('footer'); -%>

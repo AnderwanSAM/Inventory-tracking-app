@@ -1,0 +1,55 @@
+
+    <%- include('header'); -%>
+    
+    
+
+        <div class="box" id="heading" >
+            <h1> Storage name :  <%= StorageName %></h1>
+            
+        </div>
+        <div class="box"  >
+            <form action="/home" method="get">
+                 <button onclick="history.back()">  Go back </button>
+            </form>
+           
+            
+        </div>
+        <div class="box">
+            
+               <% newInventoryItems.forEach(element=> { %>
+        </div class="box">
+             <div class="box"> 
+                <form action="/update" method="post">
+                    <input type="hidden"    name="elementId" value="<%=element.name %>">
+                    <input type="hidden" name="storageName" value="<%= StorageName %>" >
+                    <button type="submit"> update </button>
+                </form>
+                <form  action="/delete" method="post"> 
+                <div class="item">   
+                    <input type="checkbox"    name="checkbox" value="<%=element._id %>"  onChange="this.form.submit()">
+                    <ul>
+                        <li> <%= element.name %> </li>
+                        <li> <%= element.weight %> g </li>
+                    </ul> 
+                    
+                </div>
+                <input type="hidden" name="storageName" value="<%= StorageName %>" >
+                </form>
+               
+            </div>
+           
+
+               <% }); %>
+
+        </div class="item">
+               <form class="item" action="/" method="post">
+                   <div  >
+                    <input type="text" name="newItem" placeholder="New item name  " autocomplete="off">
+                    <input type="text" name="newItemWeight" placeholder="New item weight " autocomplete="off">
+                   </div>
+                    <button type="submit" class="submission" name="list" value=<%= StorageName %>  > +  </button>
+              </form>
+        </div>
+        </div>
+
+  <%- include('footer'); -%>
