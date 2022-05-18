@@ -320,13 +320,13 @@ app.post("/updateItem", function(req,res){
   
 })
 
-app.listen(process.env.PORT ||  3000 ,function(){
-    if (process.env.PORT !== null) {
-        console.log("Server running on port 3000 ");
-    } else {
-        console.log("Server running on port 3000");
-    }
-   
+let port= process.env.PORT; 
+if (port== null || port ==""){
+    port = 3000;
+}
+
+app.listen(port,function(){
+    console.log("Server running ");
 })
 
 // mongoose.connection.close();
