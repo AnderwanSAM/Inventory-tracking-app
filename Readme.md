@@ -18,5 +18,5 @@ Create warehouses/locations and assign inventory to specific locations
 
 ###  Required 
 
-## Commands 
+### Commands 
 
