@@ -9,6 +9,7 @@ const _ = require("lodash");
 const { reject } = require("lodash");
 const { name } = require("ejs");
 
+
 // app setup 
 const app = express();
 app.use(express.static("public"));
@@ -18,12 +19,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 // database setup/Connections ***********************************
 
 // database connection 
-mongoose.connect("mongodb://localhost:27017/trackingApp",{useNewUrlParser: true} ); 
+mongoose.connect("mongodb+srv://user:pass@cluster0.ygxen.mongodb.net/?retryWrites=true&w=majority/trackingApp",{useNewUrlParser: true} ); 
 
 // Collections creation
 const inventoryItemSchema = new mongoose.Schema({
     name: String, 
-    weight: Number, 
+    weight: String, 
 });
 
 const InventoryItem = mongoose.model("inventoryItem",inventoryItemSchema); 
@@ -98,7 +99,6 @@ app.get("/home",function(req,res){
                         itemsList.push(ItemElement);
                     });
                 });
-                console.log(itemsList); 
                 InventoryItem.insertMany(itemsList, function(err){
                     if (err){
                         console.info(err);
@@ -170,10 +170,6 @@ app.post("/warehouses", function(req,res){
 
 });  
 
-app.get("/about", function(req,res){
-    res.render("about")
-})
-
 
 // Add items into a warehouse 
 app.post("/", function(req,res){
@@ -241,8 +237,8 @@ app.post("/delete", function(req,res){
 
     if (warehouseName === "ottawa"){
         InventoryItem.findByIdAndRemove(checkedItem,function(err){
-            if (!err){
-                console.log("successfully deleted the item"); 
+            if (err){
+                console.log(err); 
             }
             res.redirect("/");
         } )
@@ -263,8 +259,8 @@ app.post("/deleteWarehouse", function(req,res){
    
     const warehouseId = req.body.warehouseId; 
     Warehouse.findByIdAndRemove(warehouseId, function(err){
-        if (!err){
-            console.log("successfully deleted the warehouse"); 
+        if (err){
+            console.log(err); 
         }
         res.redirect("/home");
     });
@@ -276,7 +272,6 @@ app.post("/deleteWarehouse", function(req,res){
 app.post("/update", function(req,res){
    
     const warehouseName = req.body.storageName; 
-    console.log("here > " + warehouseName);
    const itemName = req.body.elementId; 
     Warehouse.findOne({name:warehouseName},function(err, foundWarehouse){
         if(err){
