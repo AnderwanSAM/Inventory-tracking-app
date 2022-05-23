@@ -96,9 +96,14 @@ app.get("/home",function(req,res){
                 let itemsList = [];
                 defaultWarehouses.forEach(element => {
                     element.warehouseInventory.forEach(ItemElement => {
-                        itemsList.push(ItemElement);
+                        let temp = new InventoryItem({
+                            name: ItemElement.name, 
+                            weight: ItemElement.weight, 
+                        }); 
+                        itemsList.push(temp);
                     });
                 });
+                
                 InventoryItem.insertMany(itemsList, function(err){
                     if (err){
                         console.info(err);
@@ -245,7 +250,13 @@ app.post("/delete", function(req,res){
     } else {
     Warehouse.findOneAndUpdate({name: warehouseName}, {$pull: {warehouseInventory: {_id: checkedItem}}}, function(err, foundWarehouse){
         if (!err){
-            res.redirect("/" + warehouseName);
+            InventoryItem.findByIdAndRemove(checkedItem,function(err){
+                if (err){
+                    console.log(err); 
+                }
+                res.redirect("/" + warehouseName);
+            } )
+            
         }
         });
 
