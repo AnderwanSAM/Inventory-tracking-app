@@ -21,24 +21,3 @@ Create warehouses/locations and assign inventory to specific locations
 Link : https://replit.com/@anderwanSam/Inventory-tracking-app#app.js
 
 
-### View live demo on heroku  (No Setup )
-
-
-### Run locally  (If you wish to test to run it locally ) 
-
-### Required 
-
-* Node JS 
-* MongoDB 
-
-### Commands 
-
-Run mongoDB 
-- Terminal 1 
-```sh
-mongod
-```
-- Terminal 2 (if you wish to see the database directly )
-```sh 
-mongo
-```
